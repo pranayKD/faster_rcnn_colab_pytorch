@@ -61,6 +61,8 @@ Since, there are spikes when the training is resumed, using the weights of pretr
 
 The network is not optimised. Better results could be obtained bt training the network for more epochs. But, even with small training network does a good enough job to identify regions where object is present in the image. 
 
+NMS could be applied here to get better and lesser bounding boxes for objects in image
+
 Few results from the validation set :
 
 ![demo_image](Images/car.png)
