@@ -15,6 +15,8 @@ The dataset has 22 classes for detection and recognition task. For this network 
 
 There are ~2000 images pertaining to these classes. 150 images are used for validation. One batch consists of a single image. 
 
+No Data augmentation techniques are used, since the aim is not to obtain best results on validation set, but to obtain good enough detection results. Data augmentation could be used to improve performance.
+
 --------
 
 ## Network Details
