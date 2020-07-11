@@ -55,6 +55,8 @@ Average training loss per 20 iterations is calculated, here is the graph,
 
 The spikes in the graph is when training is resumed from a checkpoint. Not sure about the reason for this even though the optimiser state dict is loaded while loading the model. 
 
+Later figured, this was because of a very silly data loading mistake. Fixed in the YOLO implementation repo. 
+
 Since, there are spikes when the training is resumed, using the weights of pretrained models does not produce correct results. 
 
 
