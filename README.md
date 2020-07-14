@@ -11,7 +11,7 @@ This code is the implementation of paper -
 
 PASCAL Visual Object Classes Challenge (2007) is used for training the network. 
 
-The dataset has 22 classes for detection and recognition task. For this network only 6 classes are used - **aeroplane, bicycle, boat, bus, car, train, motorbike**
+The dataset has 20 classes for detection and recognition task. For this network only 6 classes are used - **aeroplane, bicycle, boat, bus, car, train, motorbike**
 
 There are ~2000 images pertaining to these classes. 150 images are used for validation. One batch consists of a single image. 
 
