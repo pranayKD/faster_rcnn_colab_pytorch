@@ -11,11 +11,12 @@ This code is the implementation of paper -
 
 PASCAL Visual Object Classes Challenge (2007) is used for training the network. 
 
-The dataset has 20 classes for detection and recognition task. For this network only 6 classes are used - **aeroplane, bicycle, boat, bus, car, train, motorbike**
+The dataset has 20 classes for detection and recognition task. For this network only 7 classes are used - **aeroplane, bicycle, boat, bus, dog, train ,motorbike**
 
-There are ~2000 images pertaining to these classes. 150 images are used for validation. One batch consists of a single image. 
+There are ~2000 images pertaining to these classes. ~100 images are used for validation. One batch consists of a single image. 
 
-No Data augmentation techniques are used, since the aim is not to obtain best results on validation set, but to obtain good enough detection results. Data augmentation could be used to improve performance.
+Data augmentation technique is used to reduce overfitting. 
+
 
 --------
 
@@ -42,53 +43,51 @@ Network consists of
 --------
 
 ## Training
-Network is trained on google colab GPU. Network in not completely trained as training takes a lot of time. Getting a fully optimized model can take a longer time give that colab training disconnects / resets and there is a usage limit on colab. 
+Network is trained on google colab GPU.
 
-A single image is considered as a training batch. Trained the network for ~20 epochs. 
-
+A single image is considered as a training batch.
 
 ## Training Loss 
 
-Average training loss per 20 iterations is calculated, here is the graph, 
+Average training loss per 20 iterations is calculated. Here is the graph - 
 
-![Training Loss](Images/training_loss.png)
+![Training Loss](Images/train.png)
 
-The spikes in the graph is when training is resumed from a checkpoint. Not sure about the reason for this even though the optimiser state dict is loaded while loading the model. 
 
-Later figured, this was because of a very silly data loading mistake. Fixed in the YOLO implementation repo. 
+## Validation Loss
 
-Since, there are spikes when the training is resumed, using the weights of pretrained models does not produce correct results. 
+After each epoch, network is validated on the validation dataset. Here is the graph - 
 
+![Valid Loss](Images/validation.png)
+
+There is a overfitting that can be seen in Net loss. This is due to overfitting in the RPN layer of the faster-rcnn network. Strangely, the increase of validation loss does not correspond to incorrect prediction. I believe, using detection validation schema similar to MAP can help in addressing this issue. 
 
 
 ## Detection Demo Images 
 
-The network is not optimised. Better results could be obtained bt training the network for more epochs. But, even with small training network does a good enough job to identify regions where object is present in the image. 
+NMS is applied on the final predictions. Since, the network is not trained according to validation schema such as MAP optimization, this is not the optimized network. 
 
-NMS could be applied here to get better and lesser bounding boxes for objects in image
-
-Few results from the validation set :
-
-![demo_image](Images/car.png)
-
-Target - car
-
+![demo_image](Images/bicycle_out.jpg)
 --- 
-![demo_image](Images/car3.png)
-
-Target - car
+![demo_image](Images/bike_out.jpg)
 --- 
-![demo_image](Images/bicycle.png)
-
-
-Target - bicycle
-
+![demo_image](Images/boat_out_1.jpg)
 --- 
-![demo_image](Images/aeroplane.png)
-
-Target - aeroplane
-
+![demo_image](Images/boat_out_2.jpg)
 --- 
-![demo_image](Images/car_2.png)
-
-Target - car
+![demo_image](Images/boat_out_3.jpg)
+--- 
+![demo_image](Images/dog_out_1.jpg)
+--- 
+![demo_image](Images/dog_out_2.jpg)
+--- 
+![demo_image](Images/dogs_out_3.png)
+--- 
+![demo_image](Images/plane_out_1.jpg)
+--- 
+![demo_image](Images/plane_out_2.jpg)
+--- 
+![demo_image](Images/train_out_1.jpg)
+--- 
+![demo_image](Images/train_out_2.jpg)
+--- 
